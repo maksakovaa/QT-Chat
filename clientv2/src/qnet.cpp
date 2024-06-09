@@ -1,7 +1,5 @@
 #include "qnet.h"
 
-#include <iostream>
-
 QNet::QNet(QObject *parent)
     : QObject{parent}
 {

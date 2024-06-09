@@ -5,6 +5,7 @@
 QNet::QNet(QObject *parent)
     : QObject{parent}
 {
+    getConfig();
     socket = new QTcpSocket(this);
     connect(socket, &QTcpSocket::disconnected, this, &QNet::onConnectionLost);
     connect(socket, &QTcpSocket::readyRead, this, &QNet::onGetData);
@@ -74,7 +75,6 @@ void QNet::cutRequest(QString &request)
 
 void QNet::responseHandler(QString str)
 {
-//    QMessageBox::critical(nullptr, "test", str);
     if (str.startsWith("ADD_USER"))
     {
         cutRequest(str);
@@ -112,6 +112,42 @@ void QNet::responseHandler(QString str)
     {
         emit updatePMBase();
 
+    }
+}
+
+void QNet::getConfig()
+{
+    QFile file ("settings.ini");
+    QString str;
+    if (file.open(QIODevice::ReadOnly))
+    {
+        QTextStream stream(&file);
+        while (!stream.atEnd())
+        {
+            str = stream.readLine();
+            if (str.startsWith("mysql_server_ip"))
+            {
+                ip = str.remove(QRegularExpression(".* = "));
+            }
+            else if (str.startsWith("mysql_login"))
+            {
+                port = str.remove(QRegularExpression(".* = ")).toInt();
+            }
+        }
+        file.close();
+    }
+    else
+    {
+        ip = "127.0.0.1";
+        port = 63540;
+        QFile file("settings.ini");
+        if (file.open(QIODevice::WriteOnly | QIODevice::Text))
+        {
+            QTextStream config(&file);
+            config << ("mysql_server_ip = " + ip + "\n");
+            config << ("mysql_login = " + QString::number(port) + "\n");
+            file.close();
+        }
     }
 }
 

@@ -96,11 +96,7 @@ const QString& Settings::get(const QString& name)
 void Settings::saveConfig()
 {
     QFile file(cfgPath);
-    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
-    {
-
-    }
-    else
+    if (file.open(QIODevice::WriteOnly | QIODevice::Text))
     {
         QTextStream config(&file);
         config << ("mysql_server_ip = " + get("mysql_srv_ip") + "\n");
@@ -113,6 +109,7 @@ void Settings::saveConfig()
         config << ("mysql_table_private_msg = " + get("mysql_table_PM") + "\n");
         config << ("server_ip = " + get("server_ip") + "\n");
         config << ("chat_port = " + get("chat_port") + "\n");
+        file.close();
     }
 }
 

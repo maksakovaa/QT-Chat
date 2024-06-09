@@ -11,6 +11,7 @@
 ![Snapshot_2024-06-09_20-08-12](https://github.com/maksakovaa/QT-Chat/assets/149230311/a1cf0963-4476-4609-ae70-2113f81fc0cc)
 
 Вкладка общего чата
+
 ![Snapshot_2024-06-09_20-10-03](https://github.com/maksakovaa/QT-Chat/assets/149230311/a1de292f-1a31-4383-9a19-a96c482629bf)
 
 Вкладка личных сообщений

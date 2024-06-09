@@ -46,6 +46,7 @@ void ChatView::openChat(const QString &uuid)
 
 void ChatView::on_backToList_clicked()
 {
+    thisUuid.clear();
     emit openChatList();
 }
 
@@ -58,6 +59,10 @@ void ChatView::on_sndMsgButton_clicked()
 
 void ChatView::fillAM()
 {
+    if (thisUuid.isEmpty())
+    {
+        return;
+    }
     ui->MsgListWgt->clear();
     for (int i = 0; i < AllMsgBase->getCount(); ++i)
     {
@@ -65,7 +70,7 @@ void ChatView::fillAM()
         if(msg.get_mto() == "ALL" && msg.get_mstatus() == 0)
         {
             AllMsgBase->markMsgRead(i);
-            QString request = AllMsgBase->packAllMsgStatus(msg, thisUuid);
+            QString request = AllMsgBase->packAllMsgStatus(msg, currentUUID);
             emit updAllMsgStatus(request);
         }
         insertAM(msg);
@@ -74,6 +79,10 @@ void ChatView::fillAM()
 
 void ChatView::fillPM()
 {
+    if (thisUuid.isEmpty())
+    {
+        return;
+    }
     ui->MsgListWgt->clear();
     for (int i = 0; i < PerMsgBase->getCount(); ++i)
     {
@@ -114,5 +123,10 @@ void ChatView::insertPM(const Message &msg)
     listItem->setSizeHint(QSize(0, 65));
     ui->MsgListWgt->addItem(listItem);
     ui->MsgListWgt->setItemWidget(listItem, m);
+}
+
+void ChatView::setCurrentUUID(const QString &newCurrentUUID)
+{
+    currentUUID = newCurrentUUID;
 }
 

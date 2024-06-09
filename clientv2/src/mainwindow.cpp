@@ -14,6 +14,7 @@ MainWindow::MainWindow(QString userUUID, QString userName, QNet* ptr, QWidget *p
     setPtr();
     UserBase->setCurrentUUID(m_userUUID);
     ui->ChatViewListWgt->setCurrentUUID(m_userUUID);
+    ui->ChatViewWgt->setCurrentUUID(m_userUUID);
     classConnections();
     UserBase->slotGetUsrBase();
     slotUpdAllMsgBase();

@@ -19,6 +19,8 @@ public:
     void setAllMBptr(MessageBase* ptr);
     void setPerMBptr(MessageBase* ptr);
     void openChat(const QString& uuid);
+    void setCurrentUUID(const QString &newCurrentUUID);
+
 signals:
     void openChatList();
     void sendMsg(const QString& message, const QString& msgTo);

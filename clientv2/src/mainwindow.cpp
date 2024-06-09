@@ -47,6 +47,7 @@ void MainWindow::slotOpenChat(const QString &uuid)
 
 void MainWindow::slotOpenChatList()
 {
+    ui->ChatViewListWgt->updateChatList();
     ui->stackedWidget->setCurrentIndex(0);
 }
 

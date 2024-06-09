@@ -10,7 +10,7 @@ QNet::QNet(QObject *parent)
     connect(socket, &QTcpSocket::disconnected, this, &QNet::onConnectionLost);
     connect(socket, &QTcpSocket::readyRead, this, &QNet::onGetData);
 
-    socket->connectToHost("127.0.0.1", 63540);
+    socket->connectToHost(ip, port);
     nextBlockSize =0;
     if(!socket->waitForConnected())
     {

@@ -92,7 +92,7 @@ void MainWindow::updateOnlineList()
     for (auto sock: sockarr)
     {
         auto listItem = new QListWidgetItem;
-        listItem->setText("Client with id" + QString::number(sock->socketDescriptor()));
+        listItem->setText("Client with id " + QString::number(sock->socketDescriptor()));
         ui->onlineCli->addItem(listItem);
     }
 }
